@@ -77,12 +77,12 @@ EOT
 resource "vault_jwt_auth_backend_role" "example" {
   backend         = vault_jwt_auth_backend.secureops-jwt-backend.path
   role_name       = "vault-jwt-auth-role"
-  token_policies  = vault_policy.admin-policy.name
+  token_policies  = [vault_policy.admin-policy.name]
 
   bound_audiences = ["vault.workload.identity"]
   bound_claims_type = "glob"
   bound_claims = {
-    sub = "organization:ars_secureInfraPrj:project:ars_secureInfraPrj:workspace:*:run_phase:*"
+    sub = "organization:MNN-project:project:secure-ops:workspace:*:run_phase:*"
   }
   user_claim      = "terraform_full_workspace"
   role_type       = "jwt"
